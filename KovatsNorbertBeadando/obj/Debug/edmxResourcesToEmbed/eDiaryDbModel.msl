@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NewEDiaryModelStoreContainer" CdmEntityContainer="eDiaryModel">
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Classes">
+        <MappingFragment StoreEntitySet="Classes">
+          <ScalarProperty Name="Class_ID" ColumnName="Class_ID" />
+          <ScalarProperty Name="Class_Name" ColumnName="Class_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Courses">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+          <ScalarProperty Name="Course_Class_ID" ColumnName="Course_Class_ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Departments">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Departments">
+        <MappingFragment StoreEntitySet="Departments">
+          <ScalarProperty Name="Department_ID" ColumnName="Department_ID" />
+          <ScalarProperty Name="Department_Class_ID" ColumnName="Department_Class_ID" />
+          <ScalarProperty Name="Department_Teacher_ID" ColumnName="Department_Teacher_ID" />
+          <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marks">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Marks">
+        <MappingFragment StoreEntitySet="Marks">
+          <ScalarProperty Name="Mark_ID" ColumnName="Mark_ID" />
+          <ScalarProperty Name="Student_Mark_ID" ColumnName="Student_Mark_ID" />
+          <ScalarProperty Name="Course_ID" ColumnName="Course_ID" />
+          <ScalarProperty Name="Mark" ColumnName="Mark" />
+          <ScalarProperty Name="Mark_Date" ColumnName="Mark_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parents">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Parents">
+        <MappingFragment StoreEntitySet="Parents">
+          <ScalarProperty Name="Parent_ID" ColumnName="Parent_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+          <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+          <ScalarProperty Name="Parent_Phone_Number" ColumnName="Parent_Phone_Number" />
+          <ScalarProperty Name="Parent_Email" ColumnName="Parent_Email" />
+          <ScalarProperty Name="Parent_Student_ID" ColumnName="Parent_Student_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Students">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+          <ScalarProperty Name="Student_Name" ColumnName="Student_Name" />
+          <ScalarProperty Name="Student_First_Name" ColumnName="Student_First_Name" />
+          <ScalarProperty Name="Student_Last_Name" ColumnName="Student_Last_Name" />
+          <ScalarProperty Name="Student_OM_ID" ColumnName="Student_OM_ID" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Student_Phone_Number" ColumnName="Student_Phone_Number" />
+          <ScalarProperty Name="Student_Email" ColumnName="Student_Email" />
+          <ScalarProperty Name="Student_User_ID" ColumnName="Student_User_ID" />
+          <ScalarProperty Name="Departments_ID" ColumnName="Departments_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teachers">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Teachers">
+        <MappingFragment StoreEntitySet="Teachers">
+          <ScalarProperty Name="Teacher_ID" ColumnName="Teacher_ID" />
+          <ScalarProperty Name="Teacher_Name" ColumnName="Teacher_Name" />
+          <ScalarProperty Name="Teacher_First_name" ColumnName="Teacher_First_name" />
+          <ScalarProperty Name="Teacher_Last_Name" ColumnName="Teacher_Last_Name" />
+          <ScalarProperty Name="Teacher_Address" ColumnName="Teacher_Address" />
+          <ScalarProperty Name="Teacher_Phone_Number" ColumnName="Teacher_Phone_Number" />
+          <ScalarProperty Name="Teacher_Email" ColumnName="Teacher_Email" />
+          <ScalarProperty Name="Teacher_User_id" ColumnName="Teacher_User_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Users">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+          <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="User_Access_Rank" ColumnName="User_Access_Rank" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Absents">
+      <EntityTypeMapping TypeName="NewEDiaryModel.Absents">
+        <MappingFragment StoreEntitySet="Absents">
+          <ScalarProperty Name="Absent_ID" ColumnName="Absent_ID" />
+          <ScalarProperty Name="Student_Absent_ID" ColumnName="Student_Absent_ID" />
+          <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Absent_Date" ColumnName="Absent_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TDC">
+      <EntityTypeMapping TypeName="NewEDiaryModel.TDC">
+        <MappingFragment StoreEntitySet="TDC">
+          <ScalarProperty Name="TDC_Teacher_ID" ColumnName="TDC_Teacher_ID" />
+          <ScalarProperty Name="TDC_Department_ID" ColumnName="TDC_Department_ID" />
+          <ScalarProperty Name="TDC_Course_ID" ColumnName="TDC_Course_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

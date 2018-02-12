@@ -1,0 +1,223 @@
+﻿<Window x:Class="KovatsNorbertBeadando.AdminView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KovatsNorbertBeadando"
+        mc:Ignorable="d"
+        Title="Adminisztációs Menü" Height="489.186" Width="867.48" Loaded="Window_Loaded" Closing="Window_Closing">
+    <Window.Resources>
+        <local:NewEDiaryDataSet x:Key="newEDiaryDataSet"/>
+        <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource newEDiaryDataSet}}"/>
+        <CollectionViewSource x:Key="teachersViewSource" Source="{Binding Teachers, Source={StaticResource newEDiaryDataSet}}"/>
+        <CollectionViewSource x:Key="tDCViewSource" Source="{Binding TDC, Source={StaticResource newEDiaryDataSet}}"/>
+        <CollectionViewSource x:Key="departmentsViewSource" Source="{Binding Departments, Source={StaticResource newEDiaryDataSet}}"/>
+        <CollectionViewSource x:Key="teachersDepartmentsViewSource" Source="{Binding Teachers_Departments, Source={StaticResource teachersViewSource}}"/>
+        <CollectionViewSource x:Key="teachersTDCViewSource" Source="{Binding Teachers_TDC, Source={StaticResource teachersViewSource}}"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource tDCViewSource}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="saveBtn" Content="Mentés" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="768,422,0,0" Click="SaveBtnClick" Height="20"/>
+
+        <DataGrid DataContext="{StaticResource studentsViewSource}" x:Name="studentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,64,421,46" >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="student_IDColumn" Binding="{Binding Student_ID}" Header="Tanuló azonosító" Width="60"/>
+                <DataGridTextColumn x:Name="student_NameColumn" Binding="{Binding Student_Name}" Header="Név" Width="100"/>
+                <DataGridTextColumn x:Name="student_First_NameColumn" Binding="{Binding Student_First_Name}" Header="Vezetéknév" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_Last_NameColumn" Binding="{Binding Student_Last_Name}" Header="Keresztnév" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_OM_IDColumn" Binding="{Binding Student_OM_ID}" Header="OM azonosító" Width="100"/>
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Cím" Width="150"/>
+                <DataGridTextColumn x:Name="student_Phone_NumberColumn" Binding="{Binding Student_Phone_Number}" Header="Telefonszám" Width="80"/>
+                <DataGridTextColumn x:Name="student_EmailColumn" Binding="{Binding Student_Email}" Header="Email Cím" Width="100"/>
+                <DataGridTextColumn x:Name="student_User_IDColumn" Binding="{Binding Student_User_ID}" Header="Felhasználó azonosító" Width="50"/>
+                <DataGridTextColumn x:Name="departments_IDColumn" Binding="{Binding Departments_ID}" Header="Osztály Azonosító" Width="45"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid  DataContext="{StaticResource teachersViewSource}"  x:Name="teachersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,64,421,46" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="teacher_IDColumn" Binding="{Binding Teacher_ID}" Header="Tanár azonosító" Width="70"/>
+                <DataGridTextColumn x:Name="teacher_NameColumn" Binding="{Binding Teacher_Name}" Header="Név" Width="100"/>
+                <DataGridTextColumn x:Name="teacher_First_nameColumn" Binding="{Binding Teacher_First_name}" Header="Vezetéknév" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="teacher_Last_NameColumn" Binding="{Binding Teacher_Last_Name}" Header="Keresztnév" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="teacher_AddressColumn" Binding="{Binding Teacher_Address}" Header="Cím" Width="200"/>
+                <DataGridTextColumn x:Name="teacher_Phone_NumberColumn" Binding="{Binding Teacher_Phone_Number}" Header="Telefonszám" Width="100"/>
+                <DataGridTextColumn x:Name="teacher_EmailColumn" Binding="{Binding Teacher_Email}" Header="Email Cím" Width="100"/>
+                <DataGridTextColumn x:Name="teacher_User_idColumn" Binding="{Binding Teacher_User_id}" Header="Felhasználó azonosító" Width="50"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="studentOrTeacers" Content="Diákok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="776,7,0,0" Click="teachersOrStudentsButton" Height="20"/>
+        <StackPanel x:Name="TeacherStackPanel" HorizontalAlignment="Left" Height="249" Margin="464,84,0,0" VerticalAlignment="Top" Width="295">
+            <Grid x:Name="grid1" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="49,0,-37,0" VerticalAlignment="Top" Height="32" Width="220">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Teacher Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="teacher_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Teacher_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid2" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="26,0,-37,0" VerticalAlignment="Top" Height="32" Width="243">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Teacher First name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="teacher_First_nameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Teacher_First_name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid3" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="25,0,-37,0" VerticalAlignment="Top" Height="32" Width="244">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Teacher Last Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="teacher_Last_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Teacher_Last_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid4" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="38,0,-37,0" VerticalAlignment="Top" Height="32" Width="231">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Teacher Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="teacher_AddressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Teacher_Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid5" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="53,0,-37,0" VerticalAlignment="Top" Height="32" Width="216">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Teacher Email:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="teacher_EmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Teacher_Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid6" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="0,0,-37,0" VerticalAlignment="Top" Height="32" Width="269">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Teacher Phone Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="teacher_Phone_NumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Teacher_Phone_Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+        </StackPanel>
+        <StackPanel x:Name="StudentStackPanel" HorizontalAlignment="Left" Height="295" VerticalAlignment="Top" Width="295" Margin="464,84,0,0" Visibility="Hidden">
+            <Grid x:Name="grid7" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="48,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid8" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student First Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_First_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_First_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid9" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="24,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student Last Name:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_Last_NameTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_Last_Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid10" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="45,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student OM ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_OM_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_OM_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid11" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="82,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Address:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="addressTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Address, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid12" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student Phone Number:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_Phone_NumberTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_Phone_Number, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid13" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="52,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student Email:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_EmailTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_Email, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid14" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="41,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Student User ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="student_User_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Student_User_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+            <Grid x:Name="grid15" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="41,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Departments ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="departments_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding Departments_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+            </Grid>
+        </StackPanel>
+
+    </Grid>
+</Window>
