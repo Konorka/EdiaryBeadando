@@ -40,11 +40,17 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MoreLinq, Version=2.10.21623.0, Culture=neutral, PublicKeyToken=384d532d7e88985d, processorArchitecture=MSIL">
+      <HintPath>..\packages\morelinq.2.10.0\lib\net40\MoreLinq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -64,31 +70,46 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Absents.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AdminViewModel.cs" />
     <Compile Include="Classes.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CourseConverter.cs" />
     <Compile Include="Courses.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DataManager.cs" />
+    <Compile Include="DateConverter.cs" />
     <Compile Include="Departments.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="eDiaryDbModel.cs">
+    <Compile Include="eDiaryModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eDiaryModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="eDiaryModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>eDiaryModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="LoginViewModel.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="Marks.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewEDiaryDataSet.cs">
+      <DependentUpon>NewEDiaryDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="NewEDiaryDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -96,19 +117,27 @@
       <DependentUpon>NewEDiaryDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Parents.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Students.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StudentView.xaml.cs">
+      <DependentUpon>StudentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StudentViewModel.cs" />
     <Compile Include="TDC.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Teachers.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TeacherView.xaml.cs">
+      <DependentUpon>TeacherView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeacherViewModel.cs" />
     <Compile Include="Users.cs">
-      <DependentUpon>eDiaryDbModel.tt</DependentUpon>
+      <DependentUpon>eDiaryModel.tt</DependentUpon>
     </Compile>
     <Page Include="AdminView.xaml">
       <SubType>Designer</SubType>
@@ -126,16 +155,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="eDiaryDbModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>eDiaryDbModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="eDiaryDbModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>eDiaryDbModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
@@ -143,6 +162,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StudentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TeacherView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -162,12 +189,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="eDiaryDbModel.edmx">
+    <EntityDeploy Include="eDiaryModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>eDiaryDbModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>eDiaryModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="eDiaryDbModel.edmx.diagram">
-      <DependentUpon>eDiaryDbModel.edmx</DependentUpon>
+    <None Include="eDiaryModel.edmx.diagram">
+      <DependentUpon>eDiaryModel.edmx</DependentUpon>
     </None>
     <None Include="NewEDiaryDataSet.xsc">
       <DependentUpon>NewEDiaryDataSet.xsd</DependentUpon>
@@ -190,19 +217,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="eDiaryDbModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>eDiaryDbModel.edmx</DependentUpon>
-      <LastGenOutput>eDiaryDbModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="eDiaryDbModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>eDiaryDbModel.edmx</DependentUpon>
-      <LastGenOutput>eDiaryDbModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="eDiaryModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eDiaryModel.edmx</DependentUpon>
+      <LastGenOutput>eDiaryModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="eDiaryModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>eDiaryModel.edmx</DependentUpon>
+      <LastGenOutput>eDiaryModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

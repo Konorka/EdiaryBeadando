@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KovatsNorbertBeadando"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Closing="Window_Closing">
-    <Grid>
-        
+        Title="MainWindow" Height="385.936" Width="693.216" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:NewEDiaryDataSet x:Key="newEDiaryDataSet"/>
+        <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource newEDiaryDataSet}}"/>
+        <CollectionViewSource x:Key="studentsMarksViewSource" Source="{Binding Students_Marks, Source={StaticResource studentsViewSource}}"/>
+        <CollectionViewSource x:Key="studentsViewSource1" d:DesignSource="{d:DesignInstance {x:Type local:Students}, CreateList=True}"/>
+    </Window.Resources>
+
+
+    <Grid DataContext="{StaticResource studentsMarksViewSource}">
+        <DataGrid x:Name="studentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsViewSource1}}" Margin="27,110,258,45" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="departments_IDColumn" Binding="{Binding Departments_ID}" Header="Departments ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_EmailColumn" Binding="{Binding Student_Email}" Header="Student Email" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_First_NameColumn" Binding="{Binding Student_First_Name}" Header="Student First Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_IDColumn" Binding="{Binding Student_ID}" Header="Student ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_Last_NameColumn" Binding="{Binding Student_Last_Name}" Header="Student Last Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_NameColumn" Binding="{Binding Student_Name}" Header="Student Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_OM_IDColumn" Binding="{Binding Student_OM_ID}" Header="Student OM ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_Phone_NumberColumn" Binding="{Binding Student_Phone_Number}" Header="Student Phone Number" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_User_IDColumn" Binding="{Binding Student_User_ID}" Header="Student User ID" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
+
 </Window>

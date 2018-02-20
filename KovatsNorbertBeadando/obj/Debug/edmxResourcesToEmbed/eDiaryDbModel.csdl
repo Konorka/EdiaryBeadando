@@ -45,6 +45,7 @@
     <Property Name="Parent_Phone_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="Parent_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Parent_Student_ID" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="NavigationProperty1" />
   </EntityType>
   <EntityType Name="Students">
     <Key>

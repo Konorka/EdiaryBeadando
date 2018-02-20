@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eDiaryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NewEDiary.dbo.Absents' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Absents">
+    <Key>
+      <PropertyRef Name="Absent_ID" />
+      <PropertyRef Name="Student_Absent_ID" />
+      <PropertyRef Name="Hours" />
+      <PropertyRef Name="Absent_Date" />
+    </Key>
+    <Property Name="Absent_ID" Type="int" Nullable="false" />
+    <Property Name="Student_Absent_ID" Type="int" Nullable="false" />
+    <Property Name="Hours" Type="int" Nullable="false" />
+    <Property Name="Absent_Date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="Class_ID" />
+    </Key>
+    <Property Name="Class_ID" Type="int" Nullable="false" />
+    <Property Name="Class_Name" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Course_ID" />
+    </Key>
+    <Property Name="Course_ID" Type="int" Nullable="false" />
+    <Property Name="Course_Class_ID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Departments">
+    <Key>
+      <PropertyRef Name="Department_ID" />
+    </Key>
+    <Property Name="Department_ID" Type="int" Nullable="false" />
+    <Property Name="Department_Class_ID" Type="int" Nullable="false" />
+    <Property Name="Department_Teacher_ID" Type="int" Nullable="false" />
+    <Property Name="Department_Name" Type="varchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Marks">
+    <Key>
+      <PropertyRef Name="Mark_ID" />
+    </Key>
+    <Property Name="Mark_ID" Type="int" Nullable="false" />
+    <Property Name="Student_Mark_ID" Type="int" Nullable="false" />
+    <Property Name="Course_ID" Type="int" Nullable="false" />
+    <Property Name="Mark" Type="int" Nullable="false" />
+    <Property Name="Mark_Date" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Parents">
+    <Key>
+      <PropertyRef Name="Parent_ID" />
+    </Key>
+    <Property Name="Parent_ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="First_Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Last_Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Parent_Phone_Number" Type="varchar" MaxLength="20" />
+    <Property Name="Parent_Email" Type="varchar" MaxLength="50" />
+    <Property Name="Parent_Student_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Student_ID" />
+    </Key>
+    <Property Name="Student_ID" Type="int" Nullable="false" />
+    <Property Name="Student_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Student_First_Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Student_Last_Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Student_OM_ID" Type="bigint" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Student_Phone_Number" Type="varchar" MaxLength="25" />
+    <Property Name="Student_Email" Type="varchar" MaxLength="50" />
+    <Property Name="Student_User_ID" Type="int" Nullable="false" />
+    <Property Name="Departments_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'NewEDiary.dbo.TDC' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="TDC">
+    <Key>
+      <PropertyRef Name="TDC_Teacher_ID" />
+      <PropertyRef Name="TDC_Department_ID" />
+      <PropertyRef Name="TDC_Course_ID" />
+    </Key>
+    <Property Name="TDC_Teacher_ID" Type="int" Nullable="false" />
+    <Property Name="TDC_Department_ID" Type="int" Nullable="false" />
+    <Property Name="TDC_Course_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="Teacher_ID" />
+    </Key>
+    <Property Name="Teacher_ID" Type="int" Nullable="false" />
+    <Property Name="Teacher_Name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Teacher_First_name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Teacher_Last_Name" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="Teacher_Address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Teacher_Phone_Number" Type="varchar" MaxLength="20" />
+    <Property Name="Teacher_Email" Type="varchar" MaxLength="50" />
+    <Property Name="Teacher_User_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="User_ID" />
+    </Key>
+    <Property Name="User_ID" Type="int" Nullable="false" />
+    <Property Name="User_Name" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="User_Access_Rank" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="eDiaryModelStoreContainer">
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marks" EntityType="Self.Marks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parents" EntityType="Self.Parents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Absents" EntityType="Self.Absents" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Absents].[Absent_ID] AS [Absent_ID], 
+    [Absents].[Student_Absent_ID] AS [Student_Absent_ID], 
+    [Absents].[Hours] AS [Hours], 
+    [Absents].[Absent_Date] AS [Absent_Date]
+    FROM [dbo].[Absents] AS [Absents]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="TDC" EntityType="Self.TDC" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [TDC].[TDC_Teacher_ID] AS [TDC_Teacher_ID], 
+    [TDC].[TDC_Department_ID] AS [TDC_Department_ID], 
+    [TDC].[TDC_Course_ID] AS [TDC_Course_ID]
+    FROM [dbo].[TDC] AS [TDC]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

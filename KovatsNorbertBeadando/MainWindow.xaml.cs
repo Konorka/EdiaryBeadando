@@ -20,11 +20,15 @@ namespace KovatsNorbertBeadando
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly MainViewModel _vm;
+        
+        readonly MainViewModel _vm;        
         LoginView _lv = new LoginView();
         AdminView _av = new AdminView();
-        eDiaryModel context = new eDiaryModel();
+        NewEDiaryEntities context = new NewEDiaryEntities();
 
+
+
+       
         public MainWindow()
         {
             try
@@ -32,40 +36,50 @@ namespace KovatsNorbertBeadando
                 InitializeComponent();
                 var loginView = new LoginView();
                 loginView.ShowDialog();
+                
                 _vm = new MainViewModel
                 {
                     user = loginView.ViewModel.AuthenticatedUser
                 };
-                DataContext = _vm;
-
+                
                 switch (_vm.user.User_Access_Rank)
                 {
                     case 1:
-                        Hide();
                         _av.Show();
+                        Hide();
                         break;
                     case 2:
+                        TeacherView _tV = new TeacherView();
+                        _tV.Show();
+                        Hide();
                       
                         break;
                     case 3:
-                      
+                        StudentView _sV = new StudentView();
+                        _sV._sVM.userId = _vm.user.User_ID;
+                        
+                        _sV.Show();
+                        Hide();
+
                         break;
                 }
 
             }
             catch (Exception)
             {
-
-                Hide();
+                MessageBox.Show("lol?");
+                Close();
             }
-
-
-
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

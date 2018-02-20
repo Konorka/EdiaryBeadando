@@ -48,8 +48,6 @@ namespace KovatsNorbertBeadando {
         
         private global::System.Data.DataRelation relationStudents_Marks;
         
-        private global::System.Data.DataRelation relationStudents_Parents;
-        
         private global::System.Data.DataRelation relationDepartments_Students;
         
         private global::System.Data.DataRelation relationTeachers_TDC;
@@ -58,13 +56,17 @@ namespace KovatsNorbertBeadando {
         
         private global::System.Data.DataRelation relationCourses_TDC;
         
-        private global::System.Data.DataRelation relationCourses_Marks;
-        
         private global::System.Data.DataRelation relationUsers_Teachers;
         
         private global::System.Data.DataRelation relationUsers_Students;
         
         private global::System.Data.DataRelation relationTeachers_Departments;
+        
+        private global::System.Data.DataRelation relationCourses_Marks;
+        
+        private global::System.Data.DataRelation relationStudents_Departments;
+        
+        private global::System.Data.DataRelation relationStudents_Parents;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -434,15 +436,16 @@ namespace KovatsNorbertBeadando {
             }
             this.relationStudents_Absents = this.Relations["Students_Absents"];
             this.relationStudents_Marks = this.Relations["Students_Marks"];
-            this.relationStudents_Parents = this.Relations["Students_Parents"];
             this.relationDepartments_Students = this.Relations["Departments_Students"];
             this.relationTeachers_TDC = this.Relations["Teachers_TDC"];
             this.relationDepartments_TDC = this.Relations["Departments_TDC"];
             this.relationCourses_TDC = this.Relations["Courses_TDC"];
-            this.relationCourses_Marks = this.Relations["Courses_Marks"];
             this.relationUsers_Teachers = this.Relations["Users_Teachers"];
             this.relationUsers_Students = this.Relations["Users_Students"];
             this.relationTeachers_Departments = this.Relations["Teachers_Departments"];
+            this.relationCourses_Marks = this.Relations["Courses_Marks"];
+            this.relationStudents_Departments = this.Relations["Students_Departments"];
+            this.relationStudents_Parents = this.Relations["Students_Parents"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -481,10 +484,6 @@ namespace KovatsNorbertBeadando {
                         this.tableStudents.Student_IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableMarks.Student_Mark_IDColumn}, false);
             this.Relations.Add(this.relationStudents_Marks);
-            this.relationStudents_Parents = new global::System.Data.DataRelation("Students_Parents", new global::System.Data.DataColumn[] {
-                        this.tableStudents.Student_IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableParents.Parent_Student_IDColumn}, false);
-            this.Relations.Add(this.relationStudents_Parents);
             this.relationDepartments_Students = new global::System.Data.DataRelation("Departments_Students", new global::System.Data.DataColumn[] {
                         this.tableDepartments.Department_IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableStudents.Departments_IDColumn}, false);
@@ -501,10 +500,6 @@ namespace KovatsNorbertBeadando {
                         this.tableCourses.Course_IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableTDC.TDC_Course_IDColumn}, false);
             this.Relations.Add(this.relationCourses_TDC);
-            this.relationCourses_Marks = new global::System.Data.DataRelation("Courses_Marks", new global::System.Data.DataColumn[] {
-                        this.tableCourses.Course_IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableMarks.Course_IDColumn}, false);
-            this.Relations.Add(this.relationCourses_Marks);
             this.relationUsers_Teachers = new global::System.Data.DataRelation("Users_Teachers", new global::System.Data.DataColumn[] {
                         this.tableUsers.User_IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableTeachers.Teacher_User_idColumn}, false);
@@ -517,6 +512,18 @@ namespace KovatsNorbertBeadando {
                         this.tableTeachers.Teacher_IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableDepartments.Department_Teacher_IDColumn}, false);
             this.Relations.Add(this.relationTeachers_Departments);
+            this.relationCourses_Marks = new global::System.Data.DataRelation("Courses_Marks", new global::System.Data.DataColumn[] {
+                        this.tableCourses.Course_IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableMarks.Course_IDColumn}, false);
+            this.Relations.Add(this.relationCourses_Marks);
+            this.relationStudents_Departments = new global::System.Data.DataRelation("Students_Departments", new global::System.Data.DataColumn[] {
+                        this.tableStudents.Departments_IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableDepartments.Department_IDColumn}, false);
+            this.Relations.Add(this.relationStudents_Departments);
+            this.relationStudents_Parents = new global::System.Data.DataRelation("Students_Parents", new global::System.Data.DataColumn[] {
+                        this.tableStudents.Student_IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableParents.Parent_Student_IDColumn}, false);
+            this.Relations.Add(this.relationStudents_Parents);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1640,13 +1647,16 @@ namespace KovatsNorbertBeadando {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public DepartmentsRow AddDepartmentsRow(int Department_ID, int Department_Class_ID, TeachersRow parentTeachersRowByTeachers_Departments, string Department_Name) {
+            public DepartmentsRow AddDepartmentsRow(StudentsRow parentStudentsRowByStudents_Departments, int Department_Class_ID, TeachersRow parentTeachersRowByTeachers_Departments, string Department_Name) {
                 DepartmentsRow rowDepartmentsRow = ((DepartmentsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        Department_ID,
+                        null,
                         Department_Class_ID,
                         null,
                         Department_Name};
+                if ((parentStudentsRowByStudents_Departments != null)) {
+                    columnValuesArray[0] = parentStudentsRowByStudents_Departments[9];
+                }
                 if ((parentTeachersRowByTeachers_Departments != null)) {
                     columnValuesArray[2] = parentTeachersRowByTeachers_Departments[0];
                 }
@@ -4121,6 +4131,17 @@ namespace KovatsNorbertBeadando {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public StudentsRow StudentsRow {
+                get {
+                    return ((StudentsRow)(this.GetParentRow(this.Table.ParentRelations["Students_Departments"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["Students_Departments"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public StudentsRow[] GetStudentsRows() {
                 if ((this.Table.ChildRelations["Departments_Students"] == null)) {
                     return new StudentsRow[0];
@@ -4570,6 +4591,17 @@ namespace KovatsNorbertBeadando {
                 }
                 else {
                     return ((MarksRow[])(base.GetChildRows(this.Table.ChildRelations["Students_Marks"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public DepartmentsRow[] GetDepartmentsRows() {
+                if ((this.Table.ChildRelations["Students_Departments"] == null)) {
+                    return new DepartmentsRow[0];
+                }
+                else {
+                    return ((DepartmentsRow[])(base.GetChildRows(this.Table.ChildRelations["Students_Departments"])));
                 }
             }
             
@@ -9223,21 +9255,21 @@ SELECT User_ID, User_Name, Password, User_Access_Rank FROM Users WHERE (User_ID 
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._coursesTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Courses.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._coursesTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._studentsTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Students.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._studentsTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._coursesTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Courses.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._coursesTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -9320,19 +9352,19 @@ SELECT User_ID, User_Name, Password, User_Access_Rank FROM Users WHERE (User_ID 
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._coursesTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Courses.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._coursesTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._studentsTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Students.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._studentsTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._coursesTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Courses.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._coursesTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -9426,19 +9458,19 @@ SELECT User_ID, User_Name, Password, User_Access_Rank FROM Users WHERE (User_ID 
                     allChangedRows.AddRange(deletedRows);
                 }
             }
-            if ((this._studentsTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Students.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._studentsTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._coursesTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Courses.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._coursesTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._studentsTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Students.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._studentsTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

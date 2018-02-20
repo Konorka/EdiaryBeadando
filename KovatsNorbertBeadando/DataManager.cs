@@ -8,10 +8,10 @@ namespace KovatsNorbertBeadando
 {
     class DataManager
     {
-        readonly eDiaryModel _ctx;
+        readonly NewEDiaryEntities _ctx;
         public DataManager()
         {
-            _ctx = new eDiaryModel();
+            _ctx = new NewEDiaryEntities();
             if (!_ctx.Users.Any(x => x.User_Name == "admin"))
             {
                 _ctx.Users.Add(new Users

@@ -20,6 +20,6 @@ namespace KovatsNorbertBeadando
         public string Last_Name { get; set; }
         public string Parent_Phone_Number { get; set; }
         public string Parent_Email { get; set; }
-        public byte[] Parent_Student_ID { get; set; }
+        public int Parent_Student_ID { get; set; }
     }
 }
