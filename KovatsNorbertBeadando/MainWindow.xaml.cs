@@ -50,6 +50,7 @@ namespace KovatsNorbertBeadando
                         break;
                     case 2:
                         TeacherView _tV = new TeacherView();
+                        _tV._tVM.userId= _vm.user.User_ID;
                         _tV.Show();
                         Hide();
                       

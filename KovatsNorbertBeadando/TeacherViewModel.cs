@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace KovatsNorbertBeadando
 {
-    class TeacherViewModel
+    public class TeacherViewModel
     {
+        NewEDiaryEntities users = new NewEDiaryEntities();
+        public int userId { get; set; }
 
+        public int TeacherItemIndex()
+        {
+            var user = users.Teachers.FirstOrDefault(x=>x.Teacher_ID==userId);
+
+            return user.Teacher_ID - 1;
+        }
     }
 }
