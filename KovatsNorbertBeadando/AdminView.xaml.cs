@@ -14,9 +14,6 @@ using System.Windows.Shapes;
 
 namespace KovatsNorbertBeadando
 {
-    /// <summary>
-    /// Interaction logic for AdminView.xaml
-    /// </summary>
     public partial class AdminView : Window
     {
         NewEDiaryDataSet newEDiaryDataSet;

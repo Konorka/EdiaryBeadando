@@ -43,26 +43,26 @@ namespace KovatsNorbertBeadando
 
             newEDiaryDataSetStudentsTableAdapter.Fill(newEDiaryDataSet.Students);
             dbViewSource = ((CollectionViewSource)(FindResource("studentsViewSource")));
-            dbViewSource.View.MoveCurrentToFirst();
+
 
             
             newEDiaryDataSetMarksTableAdapter.Fill(newEDiaryDataSet.Marks);
             dbViewSource = ((CollectionViewSource)(FindResource("studentsMarksViewSource")));
-            dbViewSource.View.MoveCurrentToFirst();
+
 
             
             newEDiaryDataSetDepartmentsTableAdapter.Fill(newEDiaryDataSet.Departments);
             dbViewSource = ((CollectionViewSource)(FindResource("studentsDepartmentsViewSource")));
-            dbViewSource.View.MoveCurrentToFirst();
+
 
             
             newEDiaryDataSetCoursesTableAdapter.Fill(newEDiaryDataSet.Courses);
             dbViewSource = ((CollectionViewSource)(FindResource("coursesViewSource")));
-            dbViewSource.View.MoveCurrentToFirst();
+
             
             newEDiaryDataSetAbsentsTableAdapter.Fill(newEDiaryDataSet.Absents);
             dbViewSource = ((CollectionViewSource)(this.FindResource("absentsViewSource")));
-            dbViewSource.View.MoveCurrentToFirst();
+
 
 
             student_IDComboBox.SelectedIndex = _sVM.studentItemIndex();

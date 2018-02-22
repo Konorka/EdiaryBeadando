@@ -83,16 +83,7 @@
             <Label Content="Osztályfőnök" Grid.Column="0" HorizontalAlignment="Left" Margin="-4,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
             <Label x:Name="department_NameLabel" Content="{Binding Department_Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
         </Grid>
-        <DataGrid x:Name="marksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsMarksViewSource}}" Margin="382,94,7,155" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-
-                <DataGridTextColumn x:Name="student_Mark_IDColumn" Binding="{Binding Student_Mark_ID}" Header="Student Mark ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="course_IDColumn" Binding="{Binding Course_ID}" Header="Course ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="markColumn" Binding="{Binding Mark}" Header="Mark" Width="SizeToHeader"/>
-
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsAbsentsViewSource}}" Margin="382,231,10,38" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsAbsentsViewSource}}" Margin="382,249,10,38" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="absent_IDColumn" Binding="{Binding Absent_ID}" Header="Absent ID" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="student_Absent_IDColumn" Binding="{Binding Student_Absent_ID}" Header="Student Absent ID" Width="SizeToHeader"/>
@@ -107,6 +98,21 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Absent_Date}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+<Button Content="Mentés" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="648,381,0,0" Click="SaveBtnClick"/>
+        <DataGrid x:Name="marksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsMarksViewSource}}" Margin="382,94,10,167" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                
+                <DataGridTextColumn x:Name="course_IDColumn" Binding="{Binding Course_ID}" Header="Course ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="markColumn" Binding="{Binding Mark}" Header="Mark" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="mark_DateColumn" Header="Mark Date" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Mark_Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -22,11 +22,11 @@ namespace KovatsNorbertBeadando
         NewEDiaryDataSet newEDiaryDataSet;
         public TeacherViewModel _tVM = new TeacherViewModel();
         CollectionViewSource dbViewSource = new CollectionViewSource();
-        NewEDiaryDataSetTableAdapters.DepartmentsTableAdapter newEDiaryDataSetDepartmentsTableAdapter = new NewEDiaryDataSetTableAdapters.DepartmentsTableAdapter();
-        NewEDiaryDataSetTableAdapters.StudentsTableAdapter newEDiaryDataSetStudentsTableAdapter = new NewEDiaryDataSetTableAdapters.StudentsTableAdapter();
-        NewEDiaryDataSetTableAdapters.TeachersTableAdapter newEDiaryDataSetTeachersTableAdapter = new NewEDiaryDataSetTableAdapters.TeachersTableAdapter();
-        NewEDiaryDataSetTableAdapters.MarksTableAdapter newEDiaryDataSetMarksTableAdapter = new NewEDiaryDataSetTableAdapters.MarksTableAdapter();
-        NewEDiaryDataSetTableAdapters.AbsentsTableAdapter newEDiaryDataSetAbsentsTableAdapter = new NewEDiaryDataSetTableAdapters.AbsentsTableAdapter();
+        NewEDiaryDataSetTableAdapters.DepartmentsTableAdapter DepartmantContext = new NewEDiaryDataSetTableAdapters.DepartmentsTableAdapter();
+        NewEDiaryDataSetTableAdapters.StudentsTableAdapter StudentContext = new NewEDiaryDataSetTableAdapters.StudentsTableAdapter();
+        NewEDiaryDataSetTableAdapters.TeachersTableAdapter TeacherContext = new NewEDiaryDataSetTableAdapters.TeachersTableAdapter();
+        NewEDiaryDataSetTableAdapters.MarksTableAdapter MarkContext = new NewEDiaryDataSetTableAdapters.MarksTableAdapter();
+        NewEDiaryDataSetTableAdapters.AbsentsTableAdapter AbsentContext = new NewEDiaryDataSetTableAdapters.AbsentsTableAdapter();
 
 
         public TeacherView()
@@ -38,32 +38,30 @@ namespace KovatsNorbertBeadando
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             newEDiaryDataSet = ((NewEDiaryDataSet)(FindResource("newEDiaryDataSet")));
-            
 
-            
-            newEDiaryDataSetDepartmentsTableAdapter.Fill(newEDiaryDataSet.Departments);
+
+
+            DepartmantContext.Fill(newEDiaryDataSet.Departments);
             dbViewSource = ((CollectionViewSource)(FindResource("departmentsViewSource")));
-            
 
-            
-            
-            newEDiaryDataSetStudentsTableAdapter.Fill(newEDiaryDataSet.Students);
+
+
+
+            StudentContext.Fill(newEDiaryDataSet.Students);
             dbViewSource = ((CollectionViewSource)(FindResource("departmentsStudentsViewSource")));
-            
-            
-            
-            
-            newEDiaryDataSetTeachersTableAdapter.Fill(newEDiaryDataSet.Teachers);
+
+
+
+
+            TeacherContext.Fill(newEDiaryDataSet.Teachers);
             dbViewSource = ((CollectionViewSource)(FindResource("teachersViewSource")));
 
-            
-            
-            newEDiaryDataSetMarksTableAdapter.Fill(newEDiaryDataSet.Marks);
+
+            MarkContext.Fill(newEDiaryDataSet.Marks);
             dbViewSource = ((CollectionViewSource)(this.FindResource("departmentsStudentsMarksViewSource")));
-            
-            
-            
-            newEDiaryDataSetAbsentsTableAdapter.Fill(newEDiaryDataSet.Absents);
+
+
+            AbsentContext.Fill(newEDiaryDataSet.Absents);
             dbViewSource = ((CollectionViewSource)(this.FindResource("departmentsStudentsAbsentsViewSource")));
             
 
@@ -76,6 +74,15 @@ namespace KovatsNorbertBeadando
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void SaveBtnClick(object sender, RoutedEventArgs e)
+        {
+            DepartmantContext.Update(newEDiaryDataSet);
+            StudentContext.Update(newEDiaryDataSet);
+            TeacherContext.Update(newEDiaryDataSet);
+            MarkContext.Update(newEDiaryDataSet);
+            AbsentContext.Update(newEDiaryDataSet);
         }
     }
 }
