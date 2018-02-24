@@ -18,5 +18,6 @@ namespace KovatsNorbertBeadando
         public int Student_Absent_ID { get; set; }
         public int Hours { get; set; }
         public System.DateTime Absent_Date { get; set; }
+        public bool IsProven { get; set; }
     }
 }

@@ -3,47 +3,33 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Converters="clr-namespace:KovatsNorbertBeadando" 
         xmlns:local="clr-namespace:KovatsNorbertBeadando"
         mc:Ignorable="d"
-        Title="TeacherView" Height="442.009" Width="741.091" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Tanári felület" Height="442.009" Width="741.091" Closing="Window_Closing" Loaded="Window_Loaded">
     <Window.Resources>
         <local:NewEDiaryDataSet x:Key="newEDiaryDataSet"/>
+        <Converters:AvailabilityConverter x:Key="AvailabilityConverter"/>
         <CollectionViewSource x:Key="departmentsViewSource" Source="{Binding Departments, Source={StaticResource newEDiaryDataSet}}"/>
         <CollectionViewSource x:Key="departmentsStudentsViewSource" Source="{Binding Departments_Students, Source={StaticResource departmentsViewSource}}"/>
         <CollectionViewSource x:Key="teachersViewSource" Source="{Binding Teachers, Source={StaticResource newEDiaryDataSet}}"/>
         <CollectionViewSource x:Key="teachersDepartmentsViewSource" Source="{Binding Teachers_Departments, Source={StaticResource teachersViewSource}}"/>
         <CollectionViewSource x:Key="departmentsStudentsMarksViewSource" Source="{Binding Students_Marks, Source={StaticResource departmentsStudentsViewSource}}"/>
         <CollectionViewSource x:Key="departmentsStudentsAbsentsViewSource" Source="{Binding Students_Absents, Source={StaticResource departmentsStudentsViewSource}}"/>
+        <CollectionViewSource x:Key="departmentsStudentsParentsViewSource" Source="{Binding Students_Parents, Source={StaticResource departmentsStudentsViewSource}}"/>
+        <local:NewEDiaryDataSet1 x:Key="newEDiaryDataSet1"/>
+        <CollectionViewSource x:Key="departmentsViewSource1" Source="{Binding Departments, Source={StaticResource newEDiaryDataSet1}}"/>
+        <CollectionViewSource x:Key="departmentsStudentsViewSource1" Source="{Binding Departments_Students, Source={StaticResource departmentsViewSource1}}"/>
+        <CollectionViewSource x:Key="departmentsStudentsAbsentsViewSource1" Source="{Binding Students_Absents, Source={StaticResource departmentsStudentsViewSource1}}"/>
+        <CollectionViewSource x:Key="departmentsStudentsMarksViewSource1" Source="{Binding Students_Marks, Source={StaticResource departmentsStudentsViewSource1}}"/>
+        <CollectionViewSource x:Key="departmentsStudentsParentsViewSource1" Source="{Binding Students_Parents, Source={StaticResource departmentsStudentsViewSource1}}"/>
+        <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource newEDiaryDataSet1}}"/>
+        <CollectionViewSource x:Key="studentsParentsViewSource" Source="{Binding Students_Parents, Source={StaticResource studentsViewSource}}"/>
     </Window.Resources>
 
 
 
     <Grid DataContext="{StaticResource departmentsStudentsViewSource}" >
-        <Grid x:Name="grid1" DataContext="{StaticResource departmentsViewSource}" HorizontalAlignment="Left" Margin="6,62,0,0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Osztályok:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <ComboBox x:Name="department_NameComboBox" Grid.Column="1" DisplayMemberPath="Department_Name" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3,5,0,5" Grid.Row="0" VerticalAlignment="Center" Width="59">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-        </Grid>
-        <DataGrid x:Name="studentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="13,94,356,38" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="student_NameColumn" Binding="{Binding Student_Name}" Header="Student Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="addressColumn" Binding="{Binding Address}" Header="Address" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="student_Phone_NumberColumn" Binding="{Binding Student_Phone_Number}" Header="Student Phone Number" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="student_EmailColumn" Binding="{Binding Student_Email}" Header="Student Email" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
         <Grid x:Name="grid2" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="489,20,0,0" VerticalAlignment="Top" Visibility="Hidden">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -52,8 +38,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Label Content="Teacher ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Visibility="Hidden"/>
-            <ComboBox x:Name="teacher_IDComboBox" Grid.Column="1" DisplayMemberPath="Teacher_ID" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120" Visibility="Hidden">
+            <Label Content="Teacher ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Visibility="Visible"/>
+            <ComboBox x:Name="teacher_IDComboBox" Grid.Column="1" DisplayMemberPath="Teacher_ID" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120" Visibility="Visible">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel/>
@@ -83,33 +69,111 @@
             <Label Content="Osztályfőnök" Grid.Column="0" HorizontalAlignment="Left" Margin="-4,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
             <Label x:Name="department_NameLabel" Content="{Binding Department_Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
         </Grid>
-        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsAbsentsViewSource}}" Margin="382,249,10,38" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <Button Content="Mentés" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="648,381,0,0" Click="SaveBtnClick"/>
+        <Button x:Name="ChangeBtn" Content="Tanuló elérhetőségek" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="575,66,0,0" Click="Button_Click"/>
+
+
+        <StackPanel x:Name="StudentAvailability" HorizontalAlignment="Left" Height="153" Margin="382,99,0,0" VerticalAlignment="Top" Width="341" Visibility="Hidden">
+
+
+            <Grid x:Name="grid1" DataContext="{StaticResource departmentsStudentsViewSource1}" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Tanuló telefonszáma:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <Label x:Name="student_Phone_NumberLabel" Content="{Binding Student_Phone_Number, Converter={StaticResource AvailabilityConverter}}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="grid5" DataContext="{StaticResource departmentsStudentsViewSource1}" HorizontalAlignment="Left" Margin="14,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Tanuló email címe:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <Label x:Name="student_EmailLabel" Content="{Binding Student_Email, Converter={StaticResource AvailabilityConverter}}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="grid6" DataContext="{StaticResource departmentsStudentsParentsViewSource1}" HorizontalAlignment="Left" Margin="51,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Szülő neve:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <Label x:Name="nameLabel" Content="{Binding Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="grid7" DataContext="{StaticResource departmentsStudentsParentsViewSource1}" HorizontalAlignment="Left" Margin="6,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Szülő telefonszáma:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <Label x:Name="parent_Phone_NumberLabel" Content="{Binding Parent_Phone_Number, Converter={StaticResource AvailabilityConverter}}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="grid8" DataContext="{StaticResource departmentsStudentsParentsViewSource1}" HorizontalAlignment="Left" Margin="19,0,0,0" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Szülő email címe:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+                <Label x:Name="parent_EmailLabel" Content="{Binding Parent_Email, Converter={StaticResource AvailabilityConverter}}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            </Grid>
+        </StackPanel>
+        <Grid x:Name="grid9" DataContext="{StaticResource departmentsViewSource1}" HorizontalAlignment="Left" Margin="5,58,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Osztályok:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="department_NameComboBox" Grid.Column="1" DisplayMemberPath="Department_Name" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3,5,0,5" Grid.Row="0" VerticalAlignment="Center" Width="59">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+        </Grid>
+        <DataGrid x:Name="studentsDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsViewSource1}}" Margin="6,99,360,38" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="absent_IDColumn" Binding="{Binding Absent_ID}" Header="Absent ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="student_Absent_IDColumn" Binding="{Binding Student_Absent_ID}" Header="Student Absent ID" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="hoursColumn" Header="Hours" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Hours}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Absent Date" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Absent_Date}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn x:Name="student_NameColumn1" Binding="{Binding Student_Name}" Header="Tanuló neve" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="student_OM_IDColumn1" Binding="{Binding Student_OM_ID}" Header="OM azonosító" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="addressColumn1" Binding="{Binding Address}" Header="Lakcím" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
-<Button Content="Mentés" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="648,381,0,0" Click="SaveBtnClick"/>
-        <DataGrid x:Name="marksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsMarksViewSource}}" Margin="382,94,10,167" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsAbsentsViewSource1}}" Margin="382,249,10,38" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
-                
-                <DataGridTextColumn x:Name="course_IDColumn" Binding="{Binding Course_ID}" Header="Course ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="markColumn" Binding="{Binding Mark}" Header="Mark" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="mark_DateColumn" Header="Mark Date" Width="SizeToHeader">
+                <DataGridTextColumn x:Name="hoursColumn" Binding="{Binding Hours}" Header="Óra" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Dátum" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Absent_Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridCheckBoxColumn x:Name="isProvenColumn" Binding="{Binding IsProven}" Header="Igazolt" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="marksDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsMarksViewSource1}}" Margin="382,99,10,167" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="course_IDColumn1" Binding="{Binding Course_ID}" Header="Tanóra az." Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="markColumn1" Binding="{Binding Mark}" Header="Érdemjegy" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="mark_DateColumn1" Header="Érdemjegy Dátuma" Width="SizeToHeader">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding Mark_Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>

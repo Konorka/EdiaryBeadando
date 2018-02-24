@@ -15,6 +15,8 @@
         <CollectionViewSource x:Key="teachersDepartmentsViewSource" Source="{Binding Teachers_Departments, Source={StaticResource teachersViewSource}}"/>
         <CollectionViewSource x:Key="studentsAbsentsViewSource" Source="{Binding Students_Absents, Source={StaticResource studentsViewSource}}"/>
         <CollectionViewSource x:Key="studentsMarksViewSource" Source="{Binding Students_Marks, Source={StaticResource studentsViewSource}}"/>
+        <local:NewEDiaryDataSet1 x:Key="newEDiaryDataSet1"/>
+        <CollectionViewSource x:Key="usersViewSource" Source="{Binding Users, Source={StaticResource newEDiaryDataSet1}}"/>
 
     </Window.Resources>
 
@@ -38,7 +40,7 @@
                 <DataGridTextColumn x:Name="departments_IDColumn" Binding="{Binding Departments_ID}" Header="Osztály Azonosító" Width="45"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid  DataContext="{StaticResource teachersViewSource}"  x:Name="teachersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,64,421,46" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid  DataContext="{StaticResource teachersViewSource}" x:Name="teachersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,64,421,46" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="teacher_IDColumn" Binding="{Binding Teacher_ID}" Header="Tanár azonosító" Width="70"/>
                 <DataGridTextColumn x:Name="teacher_NameColumn" Binding="{Binding Teacher_Name}" Header="Név" Width="100"/>
@@ -51,46 +53,45 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="studentOrTeacers" Content="Diákok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="776,7,0,0" Click="teachersOrStudentsButton" Height="20"/>
-        <DataGrid x:Name="parentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="449,64,10,297" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Visible">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="parent_IDColumn" Binding="{Binding Parent_ID}" Header="Szülő azonosító" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Név" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="first_NameColumn" Binding="{Binding First_Name}" Header="Vezetéknév" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="last_NameColumn" Binding="{Binding Last_Name}" Header="Keresztnév" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="parent_Phone_NumberColumn" Binding="{Binding Parent_Phone_Number}" Header="Telefonszám" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="parent_EmailColumn" Binding="{Binding Parent_Email}" Header="Email cím" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="parent_Student_IDColumn" Binding="{Binding Parent_Student_ID}" Header="Szülő tanuló azonosító" Width="SizeToHeader"/>
-            </DataGrid.Columns>
-        </DataGrid>
         <Label x:Name="teacherStudentLabel" Content="Tanár adatai:" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="depParLabel" Content="Osztályőnök adatok:" HorizontalAlignment="Left" Margin="449,33,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsAbsentsViewSource}}" Margin="449,312,10,46" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="absent_IDColumn" Binding="{Binding Absent_ID}" Header="Hiányzás az." Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="student_Absent_IDColumn" Binding="{Binding Student_Absent_ID}" Header="Tanuló az." Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="hoursColumn" Header="Óra" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Hours}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Dátum" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Absent_Date}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
         <DataGrid x:Name="marksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsMarksViewSource}}" Margin="450,166,9,151" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Hidden">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="mark_IDColumn" Binding="{Binding Mark_ID}" Header="Jegy az." Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="student_Mark_IDColumn" Binding="{Binding Student_Mark_ID}" Header="Tanuló az." Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="course_IDColumn" Binding="{Binding Course_ID}" Header="Tanóra az." Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="markColumn" Binding="{Binding Mark}" Header="Jegy" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="mark_DateColumn" Binding="{Binding Mark_Date}" Header="Dátum" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="mark_DateColumn" Header="Dátum" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Mark_Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="parentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="449,64,10,297" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Visible">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="Név" Width="100"/>
+                <DataGridTextColumn x:Name="first_NameColumn" Binding="{Binding First_Name}" Header="Vezetéknév" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="last_NameColumn" Binding="{Binding Last_Name}" Header="Keresztnév" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="parent_Phone_NumberColumn" Binding="{Binding Parent_Phone_Number}" Header="Telefonszám" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="parent_EmailColumn" Binding="{Binding Parent_Email}" Header="Email cím" Width="100"/>
+                <DataGridTextColumn x:Name="parent_Student_IDColumn" Binding="{Binding Parent_Student_ID}" Header="Szülő tanuló azonosító" Width="10"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label x:Name="depParLabel" Content="Osztályőnök adatok:" HorizontalAlignment="Left" Margin="449,33,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsAbsentsViewSource}}" Margin="449,312,10,46" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="student_Absent_IDColumn" Binding="{Binding Student_Absent_ID}" Header="Tanuló az." Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="hoursColumn" Binding="{Binding Hours}" Header="Óra" Width="SizeToHeader"/>
+
+                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Dátum" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Absent_Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="tDCDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource teachersTDCViewSource}}" Margin="449,268,10,46" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -114,6 +115,14 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="classLabel" Content="Órarend kialakításához:" HorizontalAlignment="Left" Margin="449,237,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="usersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource usersViewSource}}" Margin="10,64,421,194" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="user_NameColumn" Binding="{Binding User_Name}" Header="User Name" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding Password}" Header="Password" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="user_Access_RankColumn" Binding="{Binding User_Access_Rank}" Header="User Access Rank" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Felhasználó felvétele" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="11,10,0,0" Click="Button_Click"/>
 
     </Grid>
 </Window>

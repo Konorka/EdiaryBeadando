@@ -22,7 +22,6 @@ C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debu
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\AdminView.g.cs
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\AdminView.baml
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\GeneratedInternalTypeHelper.g.cs
-C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\KovatsNorbertBeadando.csprojResolveAssemblyReference.cache
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\StudentView.g.cs
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\TeacherView.g.cs
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\StudentView.baml
@@ -31,3 +30,4 @@ C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\bin\Debu
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\bin\Debug\System.ValueTuple.dll
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\bin\Debug\MoreLinq.xml
 C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\bin\Debug\System.ValueTuple.xml
+C:\Users\konor\Desktop\test\KovatsNorbertBeadando\KovatsNorbertBeadando\obj\Debug\KovatsNorbertBeadando.csprojResolveAssemblyReference.cache

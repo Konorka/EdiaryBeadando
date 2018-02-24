@@ -54,9 +54,15 @@ namespace KovatsNorbertBeadando
 
             StudentAbsentContext.Fill(newEDiaryDataSet.Absents);
             dbViewSource = ((CollectionViewSource)(FindResource("studentsAbsentsViewSource")));
-            
+
             StudentMarkContext.Fill(newEDiaryDataSet.Marks);
             dbViewSource = ((CollectionViewSource)(FindResource("studentsMarksViewSource")));
+            KovatsNorbertBeadando.NewEDiaryDataSet1 newEDiaryDataSet1 = ((KovatsNorbertBeadando.NewEDiaryDataSet1)(this.FindResource("newEDiaryDataSet1")));
+            // Load data into the table Users. You can modify this code as needed.
+            KovatsNorbertBeadando.NewEDiaryDataSet1TableAdapters.UsersTableAdapter newEDiaryDataSet1UsersTableAdapter = new KovatsNorbertBeadando.NewEDiaryDataSet1TableAdapters.UsersTableAdapter();
+            newEDiaryDataSet1UsersTableAdapter.Fill(newEDiaryDataSet1.Users);
+            System.Windows.Data.CollectionViewSource usersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("usersViewSource")));
+            usersViewSource.View.MoveCurrentToFirst();
         }
 
         private void SaveBtnClick(object sender, RoutedEventArgs e)
@@ -102,6 +108,15 @@ namespace KovatsNorbertBeadando
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Environment.Exit(1);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (usersDataGrid.Visibility == Visibility.Visible)
+            {
+                usersDataGrid.Visibility = Visibility.Hidden;
+            }else
+            usersDataGrid.Visibility = Visibility.Visible;
         }
     }
 }

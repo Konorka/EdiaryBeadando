@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:KovatsNorbertBeadando"
         xmlns:Converters="clr-namespace:KovatsNorbertBeadando" 
         mc:Ignorable="d"
-        Title="StudentView" Height="359.344" Width="480.601" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Tanulói felület" Height="359.344" Width="480.601" Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
         <Converters:DateConverter x:Key="DateConverter"/>
         <Converters:CourseConverter x:Key="CoursConverter"/>
+        <Converters:IsProvenConverter x:Key="IsProvenConverter"/>
         <local:NewEDiaryDataSet x:Key="newEDiaryDataSet"/>
         <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource newEDiaryDataSet}}"/>
         <CollectionViewSource x:Key="studentsMarksViewSource" Source="{Binding Students_Marks, Source={StaticResource studentsViewSource}}"/>
@@ -20,29 +21,16 @@
         <CollectionViewSource x:Key="studentsMarksCoursesViewSource" Source="{Binding Marks_Courses, Source={StaticResource studentsMarksViewSource}}"/>
         <CollectionViewSource x:Key="absentsViewSource" Source="{Binding Absents, Source={StaticResource newEDiaryDataSet}}"/>
         <CollectionViewSource x:Key="studentsAbsentsViewSource" Source="{Binding Students_Absents, Source={StaticResource studentsViewSource}}"/>
+        <Converters:NewEDiaryDataSet1 x:Key="newEDiaryDataSet1"/>
+        <CollectionViewSource x:Key="studentsViewSource1" Source="{Binding Students, Source={StaticResource newEDiaryDataSet1}}"/>
+        <CollectionViewSource x:Key="studentsAbsentsViewSource1" Source="{Binding Students_Absents, Source={StaticResource studentsViewSource1}}"/>
+        <CollectionViewSource x:Key="studentsMarksViewSource1" Source="{Binding Students_Marks, Source={StaticResource studentsViewSource1}}"/>
 
     </Window.Resources>
 
 
 
     <Grid DataContext="{StaticResource studentsMarksViewSource}">
-        <Grid x:Name="grid1" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="372,2,0,0" VerticalAlignment="Top" Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Student ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Visibility="Hidden"/>
-            <ComboBox x:Name="student_IDComboBox" Grid.Column="1" DisplayMemberPath="Student_ID" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120" Visibility="Hidden">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-        </Grid>
         <Grid x:Name="grid2" DataContext="{StaticResource studentsViewSource}" HorizontalAlignment="Left" Margin="6,4,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -74,25 +62,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
         </Grid>
-        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsAbsentsViewSource}}" Margin="308,118,10,10" RowDetailsVisibilityMode="VisibleWhenSelected">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn x:Name="hoursColumn" Header="Óra" Width="SizeToHeader">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Hours}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Hiányzás Dátuma" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding Absent_Date, Converter={StaticResource DateConverter} }"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid x:Name="marksDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="10,118,170,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+        <DataGrid x:Name="marksDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsMarksViewSource1}}" Margin="10,118,220,10" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
 
                 <DataGridTextColumn x:Name="course_IDColumn1" Binding="{Binding Course_ID, Converter={StaticResource CoursConverter}}" Header="Tantárgy" Width="100"/>
@@ -118,6 +88,49 @@
             </ComboBox>
         </Grid>
         <Label x:Name="coursAVG" Content="" HorizontalAlignment="Left" Margin="233,83,0,0" VerticalAlignment="Top" Width="79"/>
+        <Grid x:Name="grid6" DataContext="{StaticResource studentsViewSource1}" HorizontalAlignment="Left" Margin="272,14,0,0" VerticalAlignment="Top" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Student ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="student_IDComboBox" Grid.Column="1" DisplayMemberPath="Student_ID" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+        </Grid>
+        <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource studentsAbsentsViewSource1}}" Margin="258,118,5,10" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+               
+                <DataGridTemplateColumn x:Name="hoursColumn" Header="Órák" Width="35">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Hours}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Hiányzás Dáduma" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Absent_Date ,Converter={StaticResource DateConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn x:Name="isProvenColumn" Header="Igazolt" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding IsProven, Converter={StaticResource IsProvenConverter}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
 
     </Grid>
 </Window>
