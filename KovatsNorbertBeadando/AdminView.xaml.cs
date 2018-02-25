@@ -17,6 +17,7 @@ namespace KovatsNorbertBeadando
     public partial class AdminView : Window
     {
         NewEDiaryDataSet newEDiaryDataSet;
+        NewEDiaryDataSet1 newEDiaryDataSet1;
         CollectionViewSource dbViewSource = new CollectionViewSource();
         NewEDiaryDataSetTableAdapters.StudentsTableAdapter StudentContext = new NewEDiaryDataSetTableAdapters.StudentsTableAdapter();
         NewEDiaryDataSetTableAdapters.TeachersTableAdapter TeacherContext = new NewEDiaryDataSetTableAdapters.TeachersTableAdapter();
@@ -25,6 +26,7 @@ namespace KovatsNorbertBeadando
         NewEDiaryDataSetTableAdapters.TDCTableAdapter TDCContext = new NewEDiaryDataSetTableAdapters.TDCTableAdapter();
         NewEDiaryDataSetTableAdapters.AbsentsTableAdapter StudentAbsentContext = new NewEDiaryDataSetTableAdapters.AbsentsTableAdapter();
         NewEDiaryDataSetTableAdapters.MarksTableAdapter StudentMarkContext = new NewEDiaryDataSetTableAdapters.MarksTableAdapter();
+        NewEDiaryDataSet1TableAdapters.UsersTableAdapter UserContext = new NewEDiaryDataSet1TableAdapters.UsersTableAdapter();
 
         public AdminView()
         {
@@ -57,12 +59,10 @@ namespace KovatsNorbertBeadando
 
             StudentMarkContext.Fill(newEDiaryDataSet.Marks);
             dbViewSource = ((CollectionViewSource)(FindResource("studentsMarksViewSource")));
-            KovatsNorbertBeadando.NewEDiaryDataSet1 newEDiaryDataSet1 = ((KovatsNorbertBeadando.NewEDiaryDataSet1)(this.FindResource("newEDiaryDataSet1")));
-            // Load data into the table Users. You can modify this code as needed.
-            KovatsNorbertBeadando.NewEDiaryDataSet1TableAdapters.UsersTableAdapter newEDiaryDataSet1UsersTableAdapter = new KovatsNorbertBeadando.NewEDiaryDataSet1TableAdapters.UsersTableAdapter();
-            newEDiaryDataSet1UsersTableAdapter.Fill(newEDiaryDataSet1.Users);
-            System.Windows.Data.CollectionViewSource usersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("usersViewSource")));
-            usersViewSource.View.MoveCurrentToFirst();
+
+            newEDiaryDataSet1 = ((NewEDiaryDataSet1)(this.FindResource("newEDiaryDataSet1")));
+            UserContext.Fill(newEDiaryDataSet1.Users);
+            dbViewSource = ((CollectionViewSource)(this.FindResource("usersViewSource")));
         }
 
         private void SaveBtnClick(object sender, RoutedEventArgs e)
@@ -72,6 +72,7 @@ namespace KovatsNorbertBeadando
             ParentContext.Update(newEDiaryDataSet);
             DepartmantContext.Update(newEDiaryDataSet);
             TDCContext.Update(newEDiaryDataSet);
+            UserContext.Update(newEDiaryDataSet1);
         }
 
         private void teachersOrStudentsButton(object sender, RoutedEventArgs e)
