@@ -19,16 +19,12 @@ namespace KovatsNorbertBeadando
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
-        
+    {        
         readonly MainViewModel _vm;        
         LoginView _lv = new LoginView();
         AdminView _av = new AdminView();
         NewEDiaryEntities context = new NewEDiaryEntities();
-
-
-
-       
+        
         public MainWindow()
         {
             try
@@ -67,8 +63,7 @@ namespace KovatsNorbertBeadando
 
             }
             catch (Exception)
-            {
-                MessageBox.Show("lol?");
+            {               
                 Close();
             }
         }

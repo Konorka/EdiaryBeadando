@@ -6,7 +6,7 @@
         xmlns:Converters="clr-namespace:KovatsNorbertBeadando" 
         xmlns:local="clr-namespace:KovatsNorbertBeadando"
         mc:Ignorable="d"
-        Title="Tanári felület" Height="442.009" Width="741.091" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="Tanári felület" Height="442.009" Width="741.091" Closing="Window_Closing" Loaded="Window_Loaded" ResizeMode="NoResize">
     <Window.Resources>
         <local:NewEDiaryDataSet x:Key="newEDiaryDataSet"/>
         <Converters:AvailabilityConverter x:Key="AvailabilityConverter"/>
@@ -25,50 +25,13 @@
         <CollectionViewSource x:Key="departmentsStudentsParentsViewSource1" Source="{Binding Students_Parents, Source={StaticResource departmentsStudentsViewSource1}}"/>
         <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource newEDiaryDataSet1}}"/>
         <CollectionViewSource x:Key="studentsParentsViewSource" Source="{Binding Students_Parents, Source={StaticResource studentsViewSource}}"/>
+        <CollectionViewSource x:Key="teachersViewSource1" Source="{Binding Teachers, Source={StaticResource newEDiaryDataSet1}}"/>
+        <CollectionViewSource x:Key="teachersDepartmentsViewSource1" Source="{Binding Teachers_Departments, Source={StaticResource teachersViewSource1}}"/>
     </Window.Resources>
 
 
 
     <Grid DataContext="{StaticResource departmentsStudentsViewSource}" >
-        <Grid x:Name="grid2" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="489,20,0,0" VerticalAlignment="Top" Visibility="Hidden">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Teacher ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center" Visibility="Visible"/>
-            <ComboBox x:Name="teacher_IDComboBox" Grid.Column="1" DisplayMemberPath="Teacher_ID" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120" Visibility="Visible">
-                <ComboBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
-                    </ItemsPanelTemplate>
-                </ComboBox.ItemsPanel>
-            </ComboBox>
-        </Grid>
-        <Grid x:Name="grid3" DataContext="{StaticResource teachersViewSource}" HorizontalAlignment="Left" Margin="5,4,0,0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Név:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-            <Label x:Name="teacher_NameLabel" Content="{Binding Teacher_Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-        </Grid>
-        <Grid x:Name="grid4" DataContext="{StaticResource teachersDepartmentsViewSource}" HorizontalAlignment="Left" Margin="12,31,0,0" VerticalAlignment="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Label Content="Osztályfőnök" Grid.Column="0" HorizontalAlignment="Left" Margin="-4,3,0,3" Grid.Row="0" VerticalAlignment="Center"/>
-            <Label x:Name="department_NameLabel" Content="{Binding Department_Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
-        </Grid>
         <Button Content="Mentés" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="648,381,0,0" Click="SaveBtnClick"/>
         <Button x:Name="ChangeBtn" Content="Tanuló elérhetőségek" HorizontalAlignment="Left" VerticalAlignment="Top" Width="148" Margin="575,66,0,0" Click="Button_Click"/>
 
@@ -159,14 +122,14 @@
         <DataGrid x:Name="absentsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsAbsentsViewSource1}}" Margin="382,249,10,38" RowDetailsVisibilityMode="VisibleWhenSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="hoursColumn" Binding="{Binding Hours}" Header="Óra" Width="SizeToHeader"/>
-                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Dátum" Width="SizeToHeader">
+                <DataGridTemplateColumn x:Name="absent_DateColumn" Header="Dátum" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker SelectedDate="{Binding Absent_Date, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridCheckBoxColumn x:Name="isProvenColumn" Binding="{Binding IsProven}" Header="Igazolt" Width="SizeToHeader"/>
+                <DataGridCheckBoxColumn x:Name="isProvenColumn" Binding="{Binding IsProven}" Header="Igazolt" Width="70"/>
             </DataGrid.Columns>
         </DataGrid>
         <DataGrid x:Name="marksDataGrid1" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource departmentsStudentsMarksViewSource1}}" Margin="382,99,10,167" RowDetailsVisibilityMode="VisibleWhenSelected">
@@ -182,6 +145,45 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid x:Name="grid10" DataContext="{StaticResource teachersDepartmentsViewSource1}" HorizontalAlignment="Left" Margin="4,33,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Osztályfőnök:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label x:Name="department_NameLabel1" Content="{Binding Department_Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid x:Name="grid12" DataContext="{StaticResource teachersViewSource1}" HorizontalAlignment="Left" Margin="516,17,0,0" VerticalAlignment="Top" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Teacher ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="teacher_IDComboBox" Grid.Column="1" DisplayMemberPath="Teacher_ID" HorizontalAlignment="Left" Height="Auto" ItemsSource="{Binding}" Margin="3" Grid.Row="0" VerticalAlignment="Center" Width="120">
+                <ComboBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel/>
+                    </ItemsPanelTemplate>
+                </ComboBox.ItemsPanel>
+            </ComboBox>
+        </Grid>
+        <Grid x:Name="grid13" DataContext="{StaticResource teachersViewSource1}" HorizontalAlignment="Left" Margin="4,8,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="Név:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <Label x:Name="teacher_NameLabel1" Content="{Binding Teacher_Name}" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+        </Grid>
     </Grid>
 
 </Window>

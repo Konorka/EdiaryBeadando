@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KovatsNorbertBeadando"
         mc:Ignorable="d"
-        Title="Adminisztációs Menü" Height="489.186" Width="867.48" Loaded="Window_Loaded" Closing="Window_Closing">
+        Title="Adminisztációs Menü" Height="489.186" Width="867.48" Loaded="Window_Loaded" Closing="Window_Closing" ResizeMode="NoResize">
     <Window.Resources>
         <local:NewEDiaryDataSet x:Key="newEDiaryDataSet"/>
         <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource newEDiaryDataSet}}"/>
@@ -115,14 +115,15 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label x:Name="classLabel" Content="Órarend kialakításához:" HorizontalAlignment="Left" Margin="449,237,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="usersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource usersViewSource}}" Margin="10,64,421,194" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Hidden">
+        <Button Content="Felhasználó felvétele" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="11,10,0,0" Click="Button_Click"/>
+        <DataGrid x:Name="usersDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource usersViewSource}}" Margin="11,64,421,46" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Hidden">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="user_NameColumn" Binding="{Binding User_Name}" Header="User Name" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding Password}" Header="Password" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="user_Access_RankColumn" Binding="{Binding User_Access_Rank}" Header="User Access Rank" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="user_IDColumn" Binding="{Binding User_ID}" Header="Felhasználó az." Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="user_NameColumn" Binding="{Binding User_Name}" Header="Felhasználónév" Width="125"/>
+                <DataGridTextColumn x:Name="passwordColumn" Binding="{Binding Password}" Header="Jelszó" Width="125"/>
+                <DataGridTextColumn x:Name="user_Access_RankColumn" Binding="{Binding User_Access_Rank}" Header="Felhasználó hozzáférési rang" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Felhasználó felvétele" HorizontalAlignment="Left" VerticalAlignment="Top" Width="121" Margin="11,10,0,0" Click="Button_Click"/>
 
     </Grid>
 </Window>

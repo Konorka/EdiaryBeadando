@@ -24,11 +24,12 @@ namespace KovatsNorbertBeadando
 
         NewEDiaryDataSet newEDiaryDataSet;
         CollectionViewSource dbViewSource = new CollectionViewSource();
-        NewEDiaryDataSetTableAdapters.StudentsTableAdapter newEDiaryDataSetStudentsTableAdapter = new NewEDiaryDataSetTableAdapters.StudentsTableAdapter();
-        NewEDiaryDataSetTableAdapters.MarksTableAdapter newEDiaryDataSetMarksTableAdapter = new NewEDiaryDataSetTableAdapters.MarksTableAdapter();
-        NewEDiaryDataSetTableAdapters.DepartmentsTableAdapter newEDiaryDataSetDepartmentsTableAdapter = new NewEDiaryDataSetTableAdapters.DepartmentsTableAdapter();
         NewEDiaryDataSetTableAdapters.CoursesTableAdapter newEDiaryDataSetCoursesTableAdapter = new NewEDiaryDataSetTableAdapters.CoursesTableAdapter();
         NewEDiaryDataSetTableAdapters.AbsentsTableAdapter newEDiaryDataSetAbsentsTableAdapter = new NewEDiaryDataSetTableAdapters.AbsentsTableAdapter();
+        NewEDiaryDataSet1TableAdapters.StudentsTableAdapter newEDiaryDataSet1StudentsTableAdapter = new NewEDiaryDataSet1TableAdapters.StudentsTableAdapter();
+        NewEDiaryDataSet1TableAdapters.AbsentsTableAdapter newEDiaryDataSet1AbsentsTableAdapter = new NewEDiaryDataSet1TableAdapters.AbsentsTableAdapter();
+        NewEDiaryDataSet1TableAdapters.MarksTableAdapter newEDiaryDataSet1MarksTableAdapter = new NewEDiaryDataSet1TableAdapters.MarksTableAdapter();
+        NewEDiaryDataSet1TableAdapters.DepartmentsTableAdapter newEDiaryDataSet1DepartmentsTableAdapter = new NewEDiaryDataSet1TableAdapters.DepartmentsTableAdapter();
 
         public StudentView()
         {
@@ -41,47 +42,25 @@ namespace KovatsNorbertBeadando
         {
             newEDiaryDataSet = ((NewEDiaryDataSet)(FindResource("newEDiaryDataSet")));
 
-            newEDiaryDataSetStudentsTableAdapter.Fill(newEDiaryDataSet.Students);
-            dbViewSource = ((CollectionViewSource)(FindResource("studentsViewSource")));
-
-
-
-            newEDiaryDataSetMarksTableAdapter.Fill(newEDiaryDataSet.Marks);
-            dbViewSource = ((CollectionViewSource)(FindResource("studentsMarksViewSource")));
-
-
-
-            newEDiaryDataSetDepartmentsTableAdapter.Fill(newEDiaryDataSet.Departments);
-            dbViewSource = ((CollectionViewSource)(FindResource("studentsDepartmentsViewSource")));
-
-
-
             newEDiaryDataSetCoursesTableAdapter.Fill(newEDiaryDataSet.Courses);
             dbViewSource = ((CollectionViewSource)(FindResource("coursesViewSource")));
 
-
             newEDiaryDataSetAbsentsTableAdapter.Fill(newEDiaryDataSet.Absents);
-            dbViewSource = ((CollectionViewSource)(this.FindResource("absentsViewSource")));
-
-
-
-
+            dbViewSource = ((CollectionViewSource)(FindResource("absentsViewSource")));
 
             NewEDiaryDataSet1 newEDiaryDataSet1 = ((NewEDiaryDataSet1)(FindResource("newEDiaryDataSet1")));
-            NewEDiaryDataSet1TableAdapters.StudentsTableAdapter newEDiaryDataSet1StudentsTableAdapter = new NewEDiaryDataSet1TableAdapters.StudentsTableAdapter();
+
             newEDiaryDataSet1StudentsTableAdapter.Fill(newEDiaryDataSet1.Students);
-            CollectionViewSource studentsViewSource1 = ((CollectionViewSource)(FindResource("studentsViewSource1")));
-            studentsViewSource1.View.MoveCurrentToFirst();
+            dbViewSource = ((CollectionViewSource)(FindResource("studentsViewSource1")));
 
-            NewEDiaryDataSet1TableAdapters.AbsentsTableAdapter newEDiaryDataSet1AbsentsTableAdapter = new NewEDiaryDataSet1TableAdapters.AbsentsTableAdapter();
             newEDiaryDataSet1AbsentsTableAdapter.Fill(newEDiaryDataSet1.Absents);
-            CollectionViewSource studentsAbsentsViewSource1 = ((CollectionViewSource)(FindResource("studentsAbsentsViewSource1")));
-            studentsAbsentsViewSource1.View.MoveCurrentToFirst();
+            dbViewSource = ((CollectionViewSource)(FindResource("studentsAbsentsViewSource1")));
 
-            NewEDiaryDataSet1TableAdapters.MarksTableAdapter newEDiaryDataSet1MarksTableAdapter = new NewEDiaryDataSet1TableAdapters.MarksTableAdapter();
             newEDiaryDataSet1MarksTableAdapter.Fill(newEDiaryDataSet1.Marks);
-            CollectionViewSource studentsMarksViewSource1 = ((CollectionViewSource)(FindResource("studentsMarksViewSource1")));
-            studentsMarksViewSource1.View.MoveCurrentToFirst();
+            dbViewSource = ((CollectionViewSource)(FindResource("studentsMarksViewSource1")));
+            
+            newEDiaryDataSet1DepartmentsTableAdapter.Fill(newEDiaryDataSet1.Departments);
+            dbViewSource = ((CollectionViewSource)(FindResource("studentsDepartmentsViewSource1")));
 
             student_IDComboBox.SelectedIndex = _sVM.studentItemIndex();
             int comboIndex = titleComboBox.SelectedIndex;

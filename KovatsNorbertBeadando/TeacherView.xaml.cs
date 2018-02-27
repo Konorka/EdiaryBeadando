@@ -36,7 +36,7 @@ namespace KovatsNorbertBeadando
         NewEDiaryDataSet1TableAdapters.AbsentsTableAdapter AbsentContext = new NewEDiaryDataSet1TableAdapters.AbsentsTableAdapter();
         NewEDiaryDataSet1TableAdapters.MarksTableAdapter MarkContext = new NewEDiaryDataSet1TableAdapters.MarksTableAdapter();
         NewEDiaryDataSet1TableAdapters.ParentsTableAdapter ParentContext = new NewEDiaryDataSet1TableAdapters.ParentsTableAdapter();
-
+        NewEDiaryDataSet1TableAdapters.TeachersTableAdapter TeacherContext1 = new NewEDiaryDataSet1TableAdapters.TeachersTableAdapter();
 
         public TeacherView()
         {
@@ -50,11 +50,6 @@ namespace KovatsNorbertBeadando
 
             TeacherContext.Fill(newEDiaryDataSet.Teachers);
             dbViewSource = ((CollectionViewSource)(FindResource("teachersViewSource")));
-
-            department_NameComboBox.SelectedIndex = _tVM.TeacherDepartmentIndex();
-            teacher_IDComboBox.SelectedIndex = _tVM.TeacherItemIndex();
-
-
 
             newEDiaryDataSet1 = ((NewEDiaryDataSet1)(FindResource("newEDiaryDataSet1")));
 
@@ -72,6 +67,13 @@ namespace KovatsNorbertBeadando
 
             ParentContext.Fill(newEDiaryDataSet1.Parents);
             dbViewSource = ((CollectionViewSource)(FindResource("departmentsStudentsParentsViewSource1")));
+
+
+            TeacherContext1.Fill(newEDiaryDataSet1.Teachers);
+            dbViewSource = ((CollectionViewSource)(FindResource("teachersViewSource1")));
+
+            department_NameComboBox.SelectedIndex = _tVM.TeacherDepartmentIndex();
+            teacher_IDComboBox.SelectedIndex = _tVM.TeacherItemIndex();
         }
 
 
